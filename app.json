@@ -6,10 +6,23 @@
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
     "scheme": "cinevault",
-    "plugins": ["expo-router"],
-    "experiments": { "typedRoutes": true },
-    "splash": { "backgroundColor": "#10110f" },
-    "ios": { "supportsTablet": true },
-    "android": { "adaptiveIcon": { "backgroundColor": "#10110f" } }
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "splash": {
+      "backgroundColor": "#10110f"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#10110f"
+      },
+      "package": "com.anonymous.cinevaultcatalogo"
+    }
   }
 }
