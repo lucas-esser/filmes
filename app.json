@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "CineVault",
+    "slug": "cinevault-catalogo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "splash": { "backgroundColor": "#10110f" },
+    "ios": { "supportsTablet": true },
+    "android": { "adaptiveIcon": { "backgroundColor": "#10110f" } }
+  }
+}
