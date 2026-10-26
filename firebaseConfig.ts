@@ -1,23 +1,41 @@
-import { initializeApp, getApp, getApps } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getApp, getApps, initializeApp } from 'firebase/app';
+import { getReactNativePersistence, getAuth, initializeAuth } from 'firebase/auth';
+import { getDatabase } from 'firebase/database';
+import { getFirestore, initializeFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
+  apiKey: 'AIzaSyBjmvZf5fpf88lxQWgioAzKbfU1pIR8ptA',
+  authDomain: 'banco-de-dados---mobile.firebaseapp.com',
+  databaseURL: 'https://banco-de-dados---mobile-default-rtdb.firebaseio.com/',
+  projectId: 'banco-de-dados---mobile',
+  storageBucket: 'banco-de-dados---mobile.firebasestorage.app',
+  messagingSenderId: '1088455177665',
+  appId: '1:1088455177665:web:efc5f26747cdeb01632b40',
 };
 
-const missingConfig = Object.entries(firebaseConfig)
-  .filter(([, value]) => !value)
-  .map(([key]) => key);
+export const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
-export const firebaseConfigured = missingConfig.length === 0;
-export const firebaseConfigMessage = firebaseConfigured
-  ? ''
-  : `Configure as variáveis ${missingConfig.join(', ')} no arquivo .env para conectar ao Firebase.`;
+export const auth = (() => {
+  try {
+    return initializeAuth(app, {
+      persistence: getReactNativePersistence(AsyncStorage),
+    });
+  } catch {
+    return getAuth(app);
+  }
+})();
 
-const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+export const db = (() => {
+  try {
+    return initializeFirestore(app, {
+      experimentalForceLongPolling: true,
+    });
+  } catch {
+    return getFirestore(app);
+  }
+})();
+
+export const rtdb = getDatabase(app);
+export const firebaseConfigured = true;
+export const firebaseConfigMessage = '';
